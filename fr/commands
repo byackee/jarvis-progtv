@@ -1,1 +1,1 @@
-*program*tel*soir* *== say "$(xmltv-tool.sh -p -j 20161209210000 -C "(1)" test.xml)"
+*program*tel*sur (*)== say "le programme de ce soir sur (1) est " && say "$(jv_pg_pt_lunch "(1)")"
