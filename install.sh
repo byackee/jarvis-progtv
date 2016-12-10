@@ -5,4 +5,4 @@ sudo pip3 install plac
 sudo pip3 install yattag
 sudo pip3 install pytz
 echo "@midnight                               ./plugins/jarvis-progtv/download.sh" >> ./jarvis-events
-sh ./plugins/jarvis-progtv/download.sh
+sh download.sh
