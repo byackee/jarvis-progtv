@@ -8,6 +8,12 @@
 # XX can be a two letters code for your plugin, ex: ww for Weather Wunderground
 jv_pg_pt_lunch()
 {
-sh ./plugins/jarvis-progtv/fr/xmltv-tool.sh -p -j 20161209210000 -C $1 ./plugins/jarvis-progtv/fr/test.xml
+while read device
+do
+if [[ "$1" == "$device" ]]; then
+prog="$(echo "$pourquand" | jq -r ".devices[] | select(.nom==\"$device\") | .voiciladate")"
+echo $prog
+sh ./plugins/jarvis-progtv/fr/xmltv-tool.sh -p -j cesoir -C $prog ./plugins/jarvis-progtv/tv.xml
+fi
+done <<< "$(echo "$pourquand" | jq -r '.devices[].nom')"
 }
-

@@ -232,14 +232,16 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
                 print_warning('programme element without id ' + programme_elem.tostring())
 
     if filter_date:
-        date_minus = parse_time(filter_date + ' +0100') - timedelta(minutes = 10)
-        date_plus = parse_time(filter_date + ' +0100') + timedelta(minutes = 10)
-        for programme_elem in xmltv.findall('./programme'):
-            if 'start' in programme_elem.attrib:
-                if parse_time(programme_elem.attrib['start']) > date_plus or parse_time(programme_elem.attrib['start']) < date_minus:
-                    xmltv.remove(programme_elem)
-            else:
-                print_warning('programme element without id ' + programme_elem.tostring())
+        if filter_date == "cesoir":
+            datenow =datetime.now().strftime('%Y%m%d') + '210000'
+            date_minus = parse_time(datenow + ' +0100') - timedelta(minutes = 7)
+            date_plus = parse_time(datenow + ' +0100') + timedelta(minutes = 7)
+            for programme_elem in xmltv.findall('./programme'):
+                if 'start' in programme_elem.attrib:
+                    if parse_time(programme_elem.attrib['start']) > date_plus or parse_time(programme_elem.attrib['start']) < date_minus:
+                        xmltv.remove(programme_elem)
+                else:
+                    print_warning('programme element without id ' + programme_elem.tostring())
 
 
     if shift_time_onwards or shift_time_backwards:
