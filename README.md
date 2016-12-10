@@ -10,13 +10,19 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
-This plugins allows you to use Jarvis to control your Jeedom with your voice.
-You need to have [Interactions created in Jeedom](http://www.geekland-leblog.fr/jeedom-les-interactions/).
+Ce plugin permet de consulter le programme télé a partir du site https://www.kazer.org.
+L'insciption est gratuite et il suffit simplement d'ajouter les chaines que vous voulez suivre.
+
+Les chaines se nomment "une" pour TF1, "deux" pour france 2, etc... car la reconnaissance vocale ne fonctionne pas bien avec les noms des chaines télé.
+Ceci est parametrable dans le fichier config.sh
 
 ## Usage
 ```
-You: <Jeedom Interaction Name>
-Jarvis: <Jeedom Interaction Response>
+You: donne le programme télé sur la une
+Jarvis: le programme télé de ce soir sur la une est ...
+```
+You: donne le programme télé sur la deux
+Jarvis: le programme télé de ce soir sur la deux est ...
 ```
 
 ## Authors
