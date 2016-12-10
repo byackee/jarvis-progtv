@@ -20,11 +20,10 @@ Ceci est parametrable dans le fichier config.sh
 ```
 You: donne le programme télé sur la une
 Jarvis: le programme télé de ce soir sur la une est ...
-```
 You: donne le programme télé sur la deux
 Jarvis: le programme télé de ce soir sur la deux est ...
 ```
 
 ## Authors
 [Alex](https://github.com/alexylem)
-[Dud29](https://github.com/dud29)
+[Byackee](https://github.com/byackee)
