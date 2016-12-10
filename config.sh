@@ -1,11 +1,9 @@
-jv_pg_pt_ip="https://www.kazer.org/tvguide.xml?u=" # ex: "192.168.1.1"
-jv_pg_pt_key=4cgh4dkv94d6w # default is 80
 
 pourquand='{ "devices":[
-{ "voiciladate": "1", "nom": "une"},
-{ "voiciladate": "2", "nom": "deux"},
-{ "voiciladate": "3", "nom": "trois"},
-{ "voiciladate": "4", "nom": "quatre"},
-{ "voiciladate": "5", "nom": "cinq"},
-{ "voiciladate": "6", "nom": "six"}
+{ "voiciladate": "C1.telerama.fr", "nom": "une"},
+{ "voiciladate": "C2.telerama.fr", "nom": "deux"},
+{ "voiciladate": "C3.telerama.fr", "nom": "trois"},
+{ "voiciladate": "C4.telerama.fr", "nom": "quatre"},
+{ "voiciladate": "C5.telerama.fr", "nom": "cinq"},
+{ "voiciladate": "C6.telerama.fr", "nom": "six"}
 ]}'
