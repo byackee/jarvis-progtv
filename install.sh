@@ -5,4 +5,6 @@ sudo pip3 install plac
 sudo pip3 install yattag
 sudo pip3 install pytz
 echo "@midnight                               ./plugins/jarvis-progtv/download.sh" >> ./jarvis-events
-sh download.sh
+curl -k -o ./temp.zip http://xmltv.dtdns.net/download/tnt_lite.zip
+unzip -o ./temp.zip -d ./
+rm ./temp.zip
