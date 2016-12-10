@@ -13,7 +13,7 @@ do
 if [[ "$1" == "$device" ]]; then
 prog="$(echo "$pourquand" | jq -r ".devices[] | select(.nom==\"$device\") | .voiciladate")"
 echo $prog
-sh ./plugins/jarvis-progtv/fr/xmltv-tool.sh -p -j cesoir -C $prog ./plugins/jarvis-progtv/tv.xml
+sh ./plugins/jarvis-progtv/fr/xmltv-tool.sh -p -j cesoir -C $prog ./plugins/jarvis-progtv/tvguide.xml
 fi
 done <<< "$(echo "$pourquand" | jq -r '.devices[].nom')"
 }
