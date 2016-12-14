@@ -22,5 +22,4 @@ Jarvis: le programme télé de ce soir sur la une est ...
 ```
 
 ## Authors
-[Alex](https://github.com/alexylem)
 [Byackee](https://github.com/byackee)
