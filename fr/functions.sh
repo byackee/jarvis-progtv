@@ -9,6 +9,7 @@
 jv_pg_pt_lunch()
 {
 while read device
+print "test"
 do
 if [[ "$1" == "$device" ]]; then
 prog="$(echo "$pourquand" | jq -r ".devices[] | select(.nom==\"$device\") | .voiciladate")"
