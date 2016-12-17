@@ -107,7 +107,7 @@ def do_print_programs(xmltv, duration_instead_of_stop):
                 print('{0}  {1}\t - {2} {3}'.format(str(start), channel, get_program_duration(program), title))
             else:
                 print(title)
-				
+
 def xmltv_add_program(xmltv, program):
     xmltv.append(program)
 
@@ -153,7 +153,7 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
         print_days = True
 
     if filter_channels:
-        filter_channels_list = [f.strip() for f in  filter_channels.split(',')]	
+        filter_channels_list = [f.strip() for f in  filter_channels.split(',')]
 
     if filter_channels_file:
         try:
@@ -271,7 +271,7 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
 
     if print_programs:
             do_print_programs(xmltv, print_duration)
-	
+
     if not print_days and not print_channels and not print_programs:
        print(ET.tostring(xmltv, pretty_print=True).decode('utf-8'))
 

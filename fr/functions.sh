@@ -9,7 +9,6 @@
 jv_pg_pt_lunch()
 {
 while read device
-print "test"
 do
 if [[ "$1" == "$device" ]]; then
 prog="$(echo "$pourquand" | jq -r ".devices[] | select(.nom==\"$device\") | .voiciladate")"
@@ -19,7 +18,7 @@ done <<< "$(echo "$pourquand" | jq -r '.devices[].nom')"
 }
 
 jv_pg_tv_download() {
-curl -k -o ./plugins/jarvis-progtv/temp.zip http://xmltv.dtdns.net/download/tnt.zip
-unzip -o ./plugins/jarvis-progtv/temp.zip -d ./plugins/jarvis-progtv/
-rm ./plugins/jarvis-progtv/temp.zip
+curl -k -o /tmp/temp.zip http://xmltv.dtdns.net/download/tnt.zip
+unzip -o /tmp/temp.zip -d /tmp/
+rm /tmp/temp.zip
 }
