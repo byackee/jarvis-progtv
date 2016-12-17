@@ -5,7 +5,8 @@ sudo pip3 install plac
 sudo pip3 install yattag
 sudo pip3 install pytz
 sudo pip3 install lxml
-echo "    @midnight                               $jv_dir/jarvis.sh -x \"telecharge le programme tv\"" >> "$jv_dir/jarvis-events"
+echo "    @midnight                               $jv_dir/jarvis.sh -x \"telecharge le programme tv\"" >> $jv_dir/jarvis-events
+echo "$jv_dir/jarvis-events"
 crontab jarvis-events -i
 curl -k -o /tmp/progtv.zip http://xmltv.dtdns.net/download/tnt.zip
 unzip -o /tmp/progtv.zip -d $jv_dir/plugins/jarvis-progtv/
