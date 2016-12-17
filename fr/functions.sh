@@ -17,3 +17,9 @@ PYTHONIOENCODING="UTF-8" python3 ./plugins/jarvis-progtv/fr/xmltv-tool.py -p -j 
 fi
 done <<< "$(echo "$pourquand" | jq -r '.devices[].nom')"
 }
+
+jv_pg_tv_download() {
+curl -k -o ./plugins/jarvis-progtv/temp.zip http://xmltv.dtdns.net/download/tnt.zip
+unzip -o ./plugins/jarvis-progtv/temp.zip -d ./plugins/jarvis-progtv/
+rm ./plugins/jarvis-progtv/temp.zip
+}
