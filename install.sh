@@ -10,4 +10,4 @@ echo "$DIR/jarvis-events"
 crontab jarvis-events -i
 curl -k -o /tmp/progtv.zip http://xmltv.dtdns.net/download/tnt.zip
 unzip -o /tmp/progtv.zip -d /tmp
-rm /tmp/temp.zip
+rm /tmp/progtv.zip
