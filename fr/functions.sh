@@ -11,10 +11,10 @@ jv_pg_pt_lunch()
 while read device
 do
 if [[ "$1" == "$device" ]]; then
-prog="$(echo "$pourquand" | jq -r ".devices[] | select(.nom==\"$device\") | .voiciladate")"
+prog="$(echo "$listechainetv" | jq -r ".devices[] | select(.nom==\"$device\") | .chainetv")"
 PYTHONIOENCODING="UTF-8" python3 ./plugins/jarvis-progtv/fr/xmltv-tool.py -p -j cesoir -C $prog $jv_dir/plugins/jarvis-progtv/tnt.xml
 fi
-done <<< "$(echo "$pourquand" | jq -r '.devices[].nom')"
+done <<< "$(echo "$listechainetv" | jq -r '.devices[].nom')"
 }
 
 jv_pg_tv_download() {
