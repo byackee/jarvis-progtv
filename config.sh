@@ -1,4 +1,4 @@
-
+jv_pg_pt_duration="1800" # programme duration in seconds "ex: 1800 for 30mins, all programme with duration < 30mins exlude"
 listechainetv='{ "devices":[
 { "chainetv": "C1.telerama.fr", "nom": "une"},
 { "chainetv": "C1.telerama.fr", "nom": "1"},
