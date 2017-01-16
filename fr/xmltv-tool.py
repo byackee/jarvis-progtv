@@ -55,6 +55,14 @@ def get_program_title(program):
         return ''
     return title.text
 
+def get_channel_name(channel):
+    name = channel.find('display-name')
+    if name is None:
+        return None
+    if name.text is None:
+        return ''
+    return name.text
+
 def get_program_duration(program):
     stop = program.attrib['stop']
     start = program.attrib['start']
@@ -95,20 +103,25 @@ def do_print_channels(xmltv):
 
 def do_print_programs(xmltv, duration_instead_of_stop):
     programs = xmltv.findall('./programme')
-
-    for program in programs:
-        start = parse_time(program.attrib['start']).strftime('%a %Y-%m-%d %H:%M %z')
-        stop = parse_time(program.attrib['stop']).strftime('%a %Y-%m-%d %H:%M %z')
-        channel = program.attrib['channel']
-        title = get_program_title(program)
-        if title is None:
-            print('{0}  {1}'.format(str(start), channel))
-        else:
-            if duration_instead_of_stop:
-                print('{0}  {1}\t - {2} {3}'.format(str(start), channel, get_program_duration(program), title))
+    if len(programs) == 0:
+        print('ahh, désolé je nai pas trouvé de programme télé pour la selection')
+    else:
+        for program in programs:
+            start = parse_time(program.attrib['start']).strftime('%a %Y-%m-%d %H:%M %z')
+            stop = parse_time(program.attrib['stop']).strftime('%a %Y-%m-%d %H:%M %z')
+            channelprog = program.attrib['channel']
+            for channel_elem in xmltv.findall('./channel'):
+                if channel_elem.attrib['id'] == channelprog:
+                    channel = get_channel_name(channel_elem)
+            title = get_program_title(program)
+            if title is None:
+                print('{0}  {1}'.format(str(start), channel))
             else:
-                print(title)
-
+                if duration_instead_of_stop:
+                    print('{0}  {1}\t - {2} {3}'.format(str(start), channel, get_program_duration(program), title))
+                else:
+                    print('le programme télé sur', channel, 'est', title)
+	
 def xmltv_add_program(xmltv, program):
     xmltv.append(program)
 
