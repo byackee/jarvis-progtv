@@ -12,7 +12,16 @@ while read device
 do
 if [[ "$1" == "$device" ]]; then
 prog="$(echo "$listechainetv" | jq -r ".devices[] | select(.nom==\"$device\") | .chainetv")"
-PYTHONIOENCODING="UTF-8" python3 ./plugins/jarvis-progtv/fr/xmltv-tool.py -p -j cesoir -C $prog $jv_dir/plugins/jarvis-progtv/tnt.xml
+case "$2" in
+"cesoir") 
+quand='211000'
+;;
+"maintenant") 
+quand=`date +%H%M%S`
+;;
+esac
+PYTHONIOENCODING="UTF-8" python3 ./plugins/jarvis-progtv/fr/xmltv-tool.py -p -j $quand -z $3 -C $prog $jv_dir/plugins/jarvis-progtv/tnt.xml
+
 fi
 done <<< "$(echo "$listechainetv" | jq -r '.devices[].nom')"
 }
