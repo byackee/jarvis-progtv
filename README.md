@@ -18,7 +18,7 @@ Ceci est parametrable dans le fichier config.sh
 ## Ajouts récents
 - permet de connaitre le programme télé de ce soir ou mainteant.
 - répond avec le nom de la chaine télé (TF1, France2, etc..)
-- si aucune réponse, la phrase " ahh, désolé je nai pas trouvé de programme télé pour la selection"
+- si aucune réponse, la phrase " ahh, désolé je nai pas trouvé de programme télé pour la selection" est proncée
 - filtre des programmes du soir par la durée (si les programmes trouvés autour de 21h font moins de 30 mins ils seront supprimés), ce temps est paramétrable dans le fichier config.sh
 
 ## Usage
