@@ -1,3 +1,4 @@
+
 import plac
 #import xml.etree.ElementTree as ET
 from lxml import etree as ET
@@ -127,11 +128,10 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
         print_days: ('inspect dates and per-day time coverage, implies -i.', 'flag', 'd'),
         print_programs: ('inspect programs. implies -i', 'flag', 'p'),
         filter_channels: ('filter by channels id (comma separated)', 'option', 'C'),
-        filter_channels_file: ('filter by channels id loading channels from the file (one per line)', 'option', 'f'),
-	filter_date: ('filter by date and time', 'option', 'j'),
+        filter_date: ('filter by date and time', 'option', 'j'),
         shift_time_onwards: ('shift the start time dates onwards. Accepts time definitions as: 1d, 3M, 6y, 4w.','option','s'),
         shift_time_backwards: ('shift the start time dates backwards. Accepts time definitions as --shift-time-onwards.','option','S'),
-        utc: ('normalize start time to UTC','flag','u'),
+        filter_duration: ('filter by duration in hh:mm:ss', 'option', 'z'), 
         print_duration: ('print program duration instead of stop time when possible', 'flag', 't'),
         *xmltv_files):
     """
@@ -154,16 +154,6 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
 
     if filter_channels:
         filter_channels_list = [f.strip() for f in  filter_channels.split(',')]
-
-    if filter_channels_file:
-        try:
-            with io.open(filter_channels_file, encoding='utf-8') as filter_channels_f:
-                for channel in filter_channels_f:
-                    filter_channels_list.append(channel.strip())
-        except FileNotFoundError:
-            print_warning('Channels filter file does not exist')
-            return
-        filter_channels=True
 
     if debug and filter_channels:
         print("Filtering channels:")
@@ -232,18 +222,18 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
                 print_warning('programme element without id ' + programme_elem.tostring())
 
     if filter_date:
-        if filter_date == "cesoir":
-            datenow =datetime.now().strftime('%Y%m%d') + '210000'
-            date_minus = parse_time(datenow + ' +0100') - timedelta(minutes = 7)
-            date_plus = parse_time(datenow + ' +0100') + timedelta(minutes = 7)
-            for programme_elem in xmltv.findall('./programme'):
-                if 'start' in programme_elem.attrib:
-                    if parse_time(programme_elem.attrib['start']) > date_plus or parse_time(programme_elem.attrib['start']) < date_minus:
-                        xmltv.remove(programme_elem)
-                else:
-                    print_warning('programme element without id ' + programme_elem.tostring())
+        filterdate = datetime.now().strftime('%Y%m%d') + filter_date + ' +0100'
+        for programme_elem in xmltv.findall('./programme'):
+            if 'start' in programme_elem.attrib:
+                if parse_time(filterdate) < parse_time(programme_elem.attrib['start']) or parse_time(filterdate) > parse_time(programme_elem.attrib['stop']):
+                    xmltv.remove(programme_elem)
 
-
+    if filter_duration:
+        for programme_elem in xmltv.findall('./programme'):
+            if 'start' in programme_elem.attrib:
+                if get_program_duration(programme_elem).seconds < int(filter_duration):
+                    xmltv.remove(programme_elem)
+					
     if shift_time_onwards or shift_time_backwards:
         for programme_elem in xmltv.findall('./programme'):
             start = parse_time(programme_elem.attrib['start'])
@@ -252,15 +242,7 @@ def main(inspect: ('print stats about the files instead of the resulting file. E
             stop = stop + time_delta
             programme_elem.attrib['start'] = encode_time(start)
             programme_elem.attrib['stop'] = encode_time(stop)
-
-    if utc:
-        for programme_elem in xmltv.findall('./programme'):
-            start = parse_time(programme_elem.attrib['start'])
-            stop = parse_time(programme_elem.attrib['stop'])
-            programme_elem.attrib['start'] = encode_time(start.astimezone(pytz.utc))
-            programme_elem.attrib['stop'] = encode_time(stop.astimezone(pytz.utc))
-
-
+		
     # Output
 
     if print_channels:
