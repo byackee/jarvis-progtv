@@ -1,2 +1,3 @@
-*program*tel*sur* (*)== say "le programme de ce soir sur la (1) est " && say "$(jv_pg_pt_lunch (1))"
+*program*tel*soir*sur* (*)== say "le programme de ce soir sur la (1) est " && say "$(jv_pg_pt_lunch (1) 'cesoir' "$jv_pg_pt_duration")"
+*program*tel*sur* (*)== say "le programme sur la (1) est " && say "$(jv_pg_pt_lunch (1) 'maintenant' 0)"
 *TELECHARGE*PROGRAMME*TV*==jv_pg_tv_download
