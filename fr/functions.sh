@@ -20,14 +20,14 @@ quand='211000'
 quand=`date +%H%M%S`
 ;;
 esac
-PYTHONIOENCODING="UTF-8" python3 ./plugins/jarvis-progtv/fr/xmltv-tool.py -p -j $quand -z $3 -C $prog $jv_dir/plugins/jarvis-progtv/tnt.xml
+PYTHONIOENCODING="UTF-8" python3 ./plugins_installed/jarvis-progtv/fr/xmltv-tool.py -p -j $quand -z $3 -C $prog $jv_dir/plugins_installed/jarvis-progtv/tvguide.xml
 
 fi
 done <<< "$(echo "$listechainetv" | jq -r '.devices[].nom')"
 }
 
 jv_pg_tv_download() {
-curl -k -o /tmp/progtv.zip http://xmltv.dtdns.net/download/tnt.zip
-unzip -o /tmp/progtv.zip -d $jv_dir/plugins/jarvis-progtv/
+curl -k -o /tmp/progtv.zip http://xmltv.fr/guide/tvguide.zip
+unzip -o /tmp/progtv.zip -d $jv_dir/plugins_installed/jarvis-progtv/
 rm /tmp/progtv.zip
 }
